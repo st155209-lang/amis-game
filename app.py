@@ -63,12 +63,12 @@ components.html(load_game(), height=height, scrolling=False)
 # 2. 新增開發者標語
 # 做法 A：直接顯示在遊戲下方（乾淨、直覺）
 st.markdown(
-    "<p style='text-align: center; color: #888888; font-size: 14px; margin-top: 10px;'>🛠️ 開發者：信諺 Hanata</p>", 
+    "<p style='text-align: center; color: #888888; font-size: 14px; margin-top: 10px;'>❤️ 開發者：信諺 Hanata</p>", 
     unsafe_allow_html=True
 )
 
 # 做法 B：如果你想讓標語「浮動固定在畫面右下角」（像專業遊戲的浮水印），請把下面這行的 # 註解拿掉：
-# st.markdown('<div class="developer-badge">🛠️ 開發者：＊＊＊</div>', unsafe_allow_html=True)
+
 
 # 若已經把遊戲放上 GitHub Pages，也可改用下面這行（頁面較輕量），並刪掉第 47 行的 components.html：
 # components.iframe("https://<你的帳號>.github.io/<你的repo名稱>/", height=height, scrolling=False)
