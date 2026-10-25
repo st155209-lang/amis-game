@@ -15,28 +15,41 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# 隱藏 Streamlit 預設頁首/頁尾並去掉邊距，讓遊戲盡量佔滿畫面
-# 同時加入開發者標語的浮動樣式（可自由選擇開啟）
+# 隱藏 Streamlit 預設頁首/頁尾並去掉邊距
+# 同時加入兩側懸浮標語的專屬樣式
 st.markdown(
     """
     <style>
       #MainMenu, header, footer {visibility: hidden;}
       .block-container {padding: 0 !important; max-width: 100% !important;}
       
-      /* 如果你想讓標語精緻地固定在網頁右下角，可以使用下方的 CSS 樣式 */
-      .developer-badge {
+      /* 通用側邊標語樣式 */
+      .side-badge {
           position: fixed;
-          bottom: 10px;
-          right: 15px;
-          background-color: rgba(0, 0, 0, 0.6);
-          color: #ffffff;
-          padding: 5px 12px;
-          border-radius: 20px;
+          top: 50%;               /* 置於畫面垂直中間 */
+          transform: translateY(-50%); /* 精準垂直居中 */
+          background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+          color: #ffffff;         /* 白色文字 */
+          padding: 12px 6px;      /* 內邊距 */
           font-size: 13px;
           font-family: sans-serif;
-          z-index: 9999;
-          pointer-events: none;
-          letter-spacing: 1px;
+          z-index: 9999;          /* 確保顯示在最上層 */
+          pointer-events: none;   /* 滑鼠滑過時穿透，不干擾點擊 */
+          writing-mode: vertical-rl; /* 讓文字由上至下垂直排列 */
+          letter-spacing: 2px;    /* 字距直排較美觀 */
+          border-radius: 4px;     /* 稍微圓角 */
+      }
+      
+      /* 左側標語定位與左邊圓角 */
+      .badge-left {
+          left: 0;
+          border-radius: 0 4px 4px 0;
+      }
+      
+      /* 右側標語定位與右邊圓角 */
+      .badge-right {
+          right: 0;
+          border-radius: 4px 0 0 4px;
       }
     </style>
     """,
@@ -60,15 +73,12 @@ except (TypeError, ValueError):
 # 1. 載入並渲染 HTML 遊戲
 components.html(load_game(), height=height, scrolling=False)
 
-# 2. 新增開發者標語
-# 做法 A：直接顯示在遊戲下方（乾淨、直覺）
-st.markdown(
-    "<p style='text-align: center; color: #888888; font-size: 14px; margin-top: 10px;'>❤️ 開發者：信諺 Hanata</p>", 
-    unsafe_allow_html=True
-)
+# 2. 渲染兩側的懸浮標語
+# 左側標語：顯示開發者名稱
+st.markdown('<div class="side-badge badge-left">❤️❤️❤️ 開發者：Hanata 信諺</div>', unsafe_allow_html=True)
 
-# 做法 B：如果你想讓標語「浮動固定在畫面右下角」（像專業遊戲的浮水印），請把下面這行的 # 註解拿掉：
+# 右側標語：可以寫遊戲名稱、版本號或警語（文字可自由修改）
+st.markdown('<div class="side-badge badge-right">🎮 彼界之靈｜星辰守護之戰</div>', unsafe_allow_html=True)
 
-
-# 若已經把遊戲放上 GitHub Pages，也可改用下面這行（頁面較輕量），並刪掉第 47 行的 components.html：
+# 若已經把遊戲放上 GitHub Pages，也可改用下面這行（頁面較輕量），並刪掉第 67 行的 components.html：
 # components.iframe("https://<你的帳號>.github.io/<你的repo名稱>/", height=height, scrolling=False)
