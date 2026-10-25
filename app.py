@@ -41,8 +41,6 @@ except (TypeError, ValueError):
     height = 900
 
 components.html(load_game(), height=height, scrolling=False)
-st.write("---")
-    st.caption(f"© 2026 開發者 信諺 ")
 
 # 若已經把遊戲放上 GitHub Pages，也可改用下面這行（頁面較輕量），並刪掉上一行：
 # components.iframe("https://<你的帳號>.github.io/<你的repo名稱>/", height=height, scrolling=False)
